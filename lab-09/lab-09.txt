@@ -1,0 +1,162 @@
+Z1
+
+const currentUser = {
+	name: "Edek",
+  	surname: "Kredkowski",
+  	email: "edek_z_fabryki_kredek@gmail.com",
+  	www: "krEdek.pl",
+  	userType: "Admin",
+  	isActive: false,
+  
+  	show: function() {
+     	for(let item in this) {
+         	console.log(this[item]); 
+        }
+    },
+  
+  	setActive: function(value) {
+     	this.isActive = value; 
+    }
+}
+
+currentUser.show()
+currentUser.setActive(true)
+currentUser.show()
+
+
+Z2
+
+class Book {
+    users = []
+    
+    addUser(name, age, phone) {
+        this.users.push({
+            name, // <=> name: name
+            age,
+            phone
+        })
+    }
+    
+    showUsers() {
+      	console.log("Wszyscy użytkownicy w książce:")
+        for(const user of this.users) {
+            console.log(user)
+        }
+    }
+    
+    findByName(name) {
+        // for(const user of this.users) {
+        //     if(user.name === name) {
+        //         console.log(user)
+        //         return true
+        //     }
+        // }
+        
+        // return false
+        
+        const user = this.users.find((user) => user.name === name)
+        
+        if(user) {
+            return user
+        } else {
+            return false    
+        }
+    }
+  
+  	findByPhone(phone) {
+     	const user = this.users.find((user) => user.phone === phone) 
+        
+        if(user) {
+            return user
+        } else {
+            return false    
+        }
+    }
+  
+  	getCount() {
+     	console.log(this.users.length)
+    }
+}
+
+const book = new Book()
+book.addUser("Ala", 20, 763957238)
+book.addUser("Piotrek", 23, 624852412)
+book.showUsers()
+
+console.log(book.findByName("Ala"))
+console.log(book.findByName("Kot"))
+console.log(book.findByPhone(624852412))
+book.getCount()
+
+
+Z3
+
+const text = {
+ 	check(txt, word) {
+      	if(txt.includes(word)) {
+         	return true 
+        } else {
+         	 return false 
+        }
+    },
+  
+  	getCount(txt) {
+     	return txt.length 
+    },
+  
+  	getWordsCount(txt) {
+     	let wordCount = 1
+        
+        for(let i = 0; i < txt.length; ++i) {
+         	if(txt[i] === " ") {
+             	wordCount++; 
+            }
+        }
+      
+      	return wordCount
+    },
+  
+  	setCapitalize(txt) {
+      	let result = txt[0].toUpperCase()
+     	for(let i = 1; i < txt.length; ++i) {
+          	result += txt[i]
+         	if(txt[i] === " ") {
+             	result += txt[i + 1].toUpperCase()
+              	i++
+        	}
+        }
+      
+      	return result
+    },
+  
+  	setMix(txt) {
+      	let result = ""
+     	for(let i = 0; i < txt.length; ++i) {
+          	if(Math.floor(Math.random() * 2) === 0) {
+             	result += txt[i].toLowerCase()
+            } else {
+             	result += txt[i].toUpperCase() 
+            }
+        }
+      
+      	return result
+    },
+  
+  	generateRandom(lng) {
+      	let result = ""
+     	for(let i = 0; i < lng; ++i) {
+         	 let letter = Math.floor(Math.random() * 26) + 97
+             result += String.fromCharCode(letter)
+        }
+      
+      	return result
+    }
+}
+
+console.log(text.check("Ala ma kota", "kota"))
+console.log(text.check("Ala ma kota", "psa"))
+console.log(text.getCount("Ala, ma, kota"))
+console.log(text.getWordsCount("Ala ma kota"))
+console.log(text.setCapitalize("ala ma kota"))
+console.log(text.setMix("ala ma kota"))
+console.log(text.generateRandom(10))

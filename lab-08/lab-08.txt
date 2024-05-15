@@ -1,0 +1,203 @@
+Z1
+
+Operator '==' porównuje wartość nie patrząc na typ zmiennych.
+Operator '===' natomiast porównuje wartość oczekując identycznych typów.
+
+// dygresja
+===========================
+Hoisting:
+
+if (true) {
+	var myVar = 20;
+}
+
+console.log(myVar)
+
+||
+\/
+
+var myVar = 20;
+if (true) {
+
+}
+
+console.log(myVar)
+
+(oba działają tak samo)
+===========================
+// koniec dygresji
+
+
+Z2
+
+a) Słowa kluczowe 'let' i 'var' służą do deklarowania zmiennych, natomiast za pomocą 'const' deklaruje się stałe.
+Dodatkowo 'let' i 'var' różnią się zasięgiem tworzonej zmiennej. Dla 'let' zmienna będzie miała zasięg blokowy (tak samo jak 'const'), tymczasem dla 'var' obejmuje on całą funkcję.
+
+Ponadto używając 'var' można wielokrotnie zadeklarować zmienną o tej samej nazwie:
+var name = "Marcin";
+var name = "Karol";
+
+Słowo 'let' nie pozwoli na taki zapis.
+
+
+b) JavaScript korzysta z typowania niejawnego. Nie posiada oznaczeń takich jak int, float czy string.
+Zamiast tego typy zmiennych wnioskowane są z kontekstu programu przez interpreter.
+
+
+Z3
+
+function printNumbers(nr) {
+    let s = "";
+  
+  	for(let i = 0; i < nr; i++) {
+     	s += i; 
+    }
+    return s;
+}
+
+console.log(printNumbers(12));
+
+
+Z4
+
+function generateRandom(min, max) {
+ 	return Math.floor(Math.random()*(max-min+1)+min);  
+}
+
+let array = [];
+
+for(let i = 0; i < 10; i++) {
+	array.push(generateRandom(1, 20));
+}
+
+array = array.filter((item) => item > 10);
+
+// array.sort((a, b) => a > b ? -1 : 1);
+// array.reduce((previous, current) => previous + current);
+
+console.log(array);
+
+if(array.length >= 5) {
+  	console.log("udało się");
+} else {
+  	console.log("niestety nie");
+}
+
+
+Z5
+
+function checkPalindrom(txt) {
+ 	let len = txt.length;
+  	let firstHalf = txt.slice(0, len/2);
+  
+  	console.log(firstHalf);
+  
+  	let arr = [];
+  	
+  	for(let i = 0; i < firstHalf.length; i++) {
+     	arr.push(firstHalf[firstHalf.length-1 - i]); 
+    }
+  	let secondHalf = arr.join('');
+  
+  	console.log(arr);
+  	console.log(secondHalf);
+  
+  	if(len % 2 == 0) {
+      	return txt.substring(len/2) === secondHalf; 
+    } else {
+     	return txt.substring(len/2 + 1) === secondHalf; 
+    }
+}
+
+let txt = "kajak";
+console.log(checkPalindrom(txt));
+
+
+Z6
+
+function random(max) {
+ 	return Math.floor(Math.random()*(max+1));
+}
+
+let arr = [];
+
+for(let i = 0; i < 10; ++i) {
+ 	arr.push(random(20)); 
+}
+
+console.log(arr);
+
+arr = arr.sort((a, b) => a > b ? -1 : 1);
+
+console.log(arr);
+
+let sum = arr.reduce((previous, current) => previous + current);
+let avg = sum / arr.length;
+
+console.log(sum);
+console.log(avg);
+
+
+Z7
+
+const arr = [
+[ 66, 97, 114, 100, 4, 2, 110, 11, 1, 6, 20,],
+[ 99, 3, 10, 122, 76, 101, 111, 3, 32, 100, 0,],
+[ 6, 22, 1, 111, 32, 10, 110, 7, 97, 97, 67,],
+[ 60, 97, 116, 32, 100, 23, 97, 114, 100, 32, 34,],
+[ 2, 106, 15, 6, 111, 56, 80, 20, 10, 86, 10,],
+[ 20, 110, 121, 32, 107, 55, 50, 99, 110, 105, 8,],
+[ 12, 9, 22, 102, 66, 100, 12, 105, 50, 76, 110,],
+[ 42, 81, 123, 92, 26, 98, 20, 1, 20, 11, 10,],
+]
+
+const str = "rrrdddllddrrruuuurrddrruurddddlld";
+
+let cipher = [];
+cipher.push(arr[0][0]);
+
+let x = 0;
+let y = 0;
+
+for(let i = 0; i < str.length; i++) {
+	let l = str[i];
+  	// console.log(l);
+  	
+  	if(l == 'r') {
+     	y++; 
+    } else if(l == 'd') {
+     	x++; 
+    } else if(l == 'l') {
+      	y--;
+    } else if(l == 'u') {
+      	x--;
+    }
+  	
+  	cipher.push(arr[x][y]);
+}
+
+// console.log(cipher);
+
+let result = "";
+for(let i = 0; i < cipher.length; i++) {
+ 	result += String.fromCharCode(cipher[i]);
+}
+
+console.log(result);
+
+===========================
+Wynik: 'Bardzo tajny kod Leonarda da Vinci'
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
